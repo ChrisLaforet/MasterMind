@@ -1,5 +1,6 @@
 package com.chrislaforetsoftware.mm.rules
 
-class CodeMaker {
+class GameSession(val code: Code) {
+
 
 }
