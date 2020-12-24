@@ -7,50 +7,62 @@
         android:background="?attr/fullscreenBackgroundColor"
         tools:context=".board.PlayMastermindActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView
-            android:id="@+id/fullscreen_content"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="?attr/fullscreenTextColor"
-            android:keepScreenOn="true"
-            android:textStyle="bold"
-            android:textSize="50sp"
-            android:gravity="center"
-            android:text="@string/dummy_content" />
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+        >
 
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_0"
 
-        <LinearLayout
-                android:id="@+id/fullscreen_content_controls"
-                style="@style/Widget.Theme.MasterMind.ButtonBar.Fullscreen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
+            />
 
-            <Button
-                    android:id="@+id/dummy_button"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/dummy_button" />
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_1"
 
-        </LinearLayout>
+                />
 
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></LinearLayout>
-    </FrameLayout>
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_2"
 
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_3"
+
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_4"
+
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_5"
+
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_6"
+
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_7"
+
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_8"
+
+                />
+
+        <com.chrislaforetsoftware.mm.board.MastermindPegRow
+                android:id="@+id/peg_row_9"
+
+                />
+
+    </LinearLayout>
 </FrameLayout>

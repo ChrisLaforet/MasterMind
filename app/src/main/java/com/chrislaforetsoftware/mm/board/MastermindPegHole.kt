@@ -3,14 +3,17 @@ package com.chrislaforetsoftware.mm.board
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import com.chrislaforetsoftware.mm.R
+
 
 class MastermindPegHole : View {
 
     var colorName = "Empty"
     var pegColor = Color.GRAY
+
+    var defaultBoxDimension = 30
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -21,9 +24,9 @@ class MastermindPegHole : View {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
+            context,
+            attrs,
+            defStyle
     ) {
         init(attrs, defStyle)
     }
@@ -35,6 +38,20 @@ class MastermindPegHole : View {
 //        )
 
 //        a.recycle()
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        var width = 0
+        var height = 0
+        when (MeasureSpec.getMode(widthMeasureSpec)) {
+            MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> width = MeasureSpec.getSize(widthMeasureSpec)
+            MeasureSpec.UNSPECIFIED -> width = defaultBoxDimension
+        }
+        when (MeasureSpec.getMode(heightMeasureSpec)) {
+            MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> height = MeasureSpec.getSize(heightMeasureSpec)
+            MeasureSpec.UNSPECIFIED -> height = defaultBoxDimension
+        }
+        setMeasuredDimension(width, height)
     }
 
     fun setColor(colorName: String) {
@@ -62,16 +79,13 @@ class MastermindPegHole : View {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        // TODO: consider storing these as member variables to reduce
-        // allocations per draw cycle.
+//        val contentWidth = width - paddingLeft - paddingRight
+//        val contentHeight = height - paddingTop - paddingBottom
 
-  //      this.fore
-        val paddingLeft = paddingLeft
-        val paddingTop = paddingTop
-        val paddingRight = paddingRight
-        val paddingBottom = paddingBottom
-
-        val contentWidth = width - paddingLeft - paddingRight
-        val contentHeight = height - paddingTop - paddingBottom
+        val p = Paint()
+        p.setColor(pegColor)
+        p.setStyle(Paint.Style.FILL)
+        canvas.drawCircle(Rect(0,0, canvas.width, canvas.height));
+ //       canvas.drawRect(Rect(0, 0, canvas.width, canvas.height), p)
     }
 }
