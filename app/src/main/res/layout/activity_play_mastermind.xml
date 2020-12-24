@@ -31,36 +31,49 @@
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_3"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_4"
-
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_5"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_6"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_7"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_8"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_9"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
 
                 />
 
