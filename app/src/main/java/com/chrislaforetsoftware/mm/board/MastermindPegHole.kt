@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import kotlin.math.min
 
 
 class MastermindPegHole : View {
@@ -82,10 +83,15 @@ class MastermindPegHole : View {
 //        val contentWidth = width - paddingLeft - paddingRight
 //        val contentHeight = height - paddingTop - paddingBottom
 
-        val p = Paint()
-        p.setColor(pegColor)
-        p.setStyle(Paint.Style.FILL)
-        canvas.drawCircle(Rect(0,0, canvas.width, canvas.height));
+        val paint = Paint()
+        paint.setColor(pegColor)
+        paint.setStyle(Paint.Style.FILL)
+
+        val cx = canvas.width.toFloat() / 2f;
+        val cy = canvas.height.toFloat() / 2f;
+        val radius = min(cx, cy);
+
+        canvas.drawCircle(cx, cy, radius, paint)
  //       canvas.drawRect(Rect(0, 0, canvas.width, canvas.height), p)
     }
 }

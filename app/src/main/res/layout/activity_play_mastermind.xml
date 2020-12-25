@@ -4,75 +4,73 @@
         android:theme="@style/ThemeOverlay.MasterMind.FullscreenContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/fullscreenBackgroundColor"
+        android:background="#50310B"
         tools:context=".board.PlayMastermindActivity">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="2sp"
-        >
+            android:paddingTop="2sp">
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_0"
-
-            />
+                android:layout_height="50dp"
+                android:layout_width="match_parent" />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_1"
-
-                />
+                android:layout_height="50dp"
+                android:layout_width="match_parent" />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_2"
-
-                />
+                android:layout_height="50dp"
+                android:layout_width="match_parent" />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_3"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_4"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                />
+                android:layout_height="50dp"
+                android:layout_width="match_parent" />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_5"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_6"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_7"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_8"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"
 
                 />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_9"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"
 
                 />
