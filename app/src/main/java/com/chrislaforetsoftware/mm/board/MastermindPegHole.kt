@@ -15,13 +15,12 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
     var colorName = "Empty"
     var pegColor = Color.GRAY
 
-    var defaultBoxDimension = 20
+    private var defaultBoxDimension = 20
+    private var side: Int = defaultBoxDimension
 
-    constructor(context: Context) : this(context, null, 0) {
-    }
+    constructor(context: Context) : this(context, null, 0) {}
 
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {
-    }
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {}
 
     init {
         // Load attributes
@@ -43,7 +42,8 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
             MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> height = MeasureSpec.getSize(heightMeasureSpec)
             MeasureSpec.UNSPECIFIED -> height = defaultBoxDimension
         }
-        setMeasuredDimension(width, height)
+        this.side = Math.max(width, height)
+        setMeasuredDimension(this.side, this.side)
     }
 
     fun setColor(colorName: String) {
@@ -78,11 +78,16 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         paint.setColor(pegColor)
         paint.setStyle(Paint.Style.FILL)
 
-        val cx = canvas.width.toFloat() / 2f;
-        val cy = canvas.height.toFloat() / 2f;
-        val radius = min(cx, cy);
+//        val cx = canvas.width.toFloat() / 2f;
+//        val cy = canvas.height.toFloat() / 2f;
+        val sideMax = this.side * 0.8
+        val padding = (this.side.toFloat() - sideMax) / 2f
+        val radius = sideMax / 2f
+        val cx = padding + radius
+        val cy = padding + radius
 
-        canvas.drawCircle(cx, cy, radius, paint)
+
+        canvas.drawCircle(cx.toFloat(), cy.toFloat(), radius.toFloat(), paint)
  //       canvas.drawRect(Rect(0, 0, canvas.width, canvas.height), p)
     }
 }
