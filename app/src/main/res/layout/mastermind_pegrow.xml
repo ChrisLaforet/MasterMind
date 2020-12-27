@@ -9,13 +9,26 @@
         android:orientation="horizontal"
         >
 
-    <Button
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:text="PEGROW"
-            android:background="@color/teal_700"
-            android:textColor="@color/white"
-        />
+    <EditText
+            android:id="@+id/row_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#1A000000"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:ems="4"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:shadowColor="@color/white"
+            android:shadowDx="1"
+            android:shadowDy="2"
+            android:shadowRadius="0.6"
+            android:text="#"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     <com.chrislaforetsoftware.mm.board.MastermindPegHole
             android:id="@+id/peg_0"
@@ -52,4 +65,5 @@
             android:layout_width="50dp"
             android:layout_height = "50dp"
             />
+
 </LinearLayout>
