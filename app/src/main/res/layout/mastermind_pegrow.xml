@@ -9,6 +9,14 @@
         android:orientation="horizontal"
         >
 
+    <Button
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="PEGROW"
+            android:background="@color/teal_700"
+            android:textColor="@color/white"
+        />
+
     <com.chrislaforetsoftware.mm.board.MastermindPegHole
             android:id="@+id/peg_0"
             android:layout_width="50dp"

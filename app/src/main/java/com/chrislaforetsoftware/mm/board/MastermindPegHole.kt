@@ -9,30 +9,21 @@ import android.view.View
 import kotlin.math.min
 
 
-class MastermindPegHole : View {
+class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
+        View(context, attrs, defStyle) {
 
     var colorName = "Empty"
     var pegColor = Color.GRAY
 
-    var defaultBoxDimension = 30
+    var defaultBoxDimension = 20
 
-    constructor(context: Context) : super(context) {
-        init(null, 0)
+    constructor(context: Context) : this(context, null, 0) {
     }
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(attrs, 0)
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-            context,
-            attrs,
-            defStyle
-    ) {
-        init(attrs, defStyle)
-    }
-
-    private fun init(attrs: AttributeSet?, defStyle: Int) {
+    init {
         // Load attributes
 //        val a = context.obtainStyledAttributes(
 //            attrs, R.styleable.MastermindPegHole, defStyle, 0
