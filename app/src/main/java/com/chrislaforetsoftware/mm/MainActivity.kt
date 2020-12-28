@@ -27,18 +27,28 @@ class MainActivity : Activity() {
     }
 
     private fun prepareButtons() {
-        var button = findViewById(R.id.beginner_4by4_button) as? Button;
+        var button = findViewById(R.id.beginner_4by4_button) as? Button
         button?.setOnClickListener()  {
             startBeginner4x4Game()
         }
 
-        button = findViewById(R.id.beginner_6by4_button) as? Button;
+        button = findViewById(R.id.beginner_6by4_button) as? Button
         button?.setOnClickListener()  {
             startBeginner6x4Game()
         }
+
+        button = findViewById(R.id.regular_6by4_button) as? Button
+        button?.setOnClickListener()  {
+            startStandardGame()
+        }
+
+        button = findViewById(R.id.brainbuster_6by6_button) as? Button
+        button?.setOnClickListener()  {
+            startBrainBusterGame()
+        }
     }
 
-    fun startBeginner4x4Game() {
+    private fun startBeginner4x4Game() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
         intent.putExtra(TOTAL_WELLS, 4)
         intent.putExtra(TOTAL_COLORS, 4)
@@ -46,7 +56,7 @@ class MainActivity : Activity() {
         startActivity(intent)
     }
 
-    fun startBeginner6x4Game() {
+    private fun startBeginner6x4Game() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
         intent.putExtra(TOTAL_WELLS, 4)
         intent.putExtra(TOTAL_COLORS, 6)
@@ -54,7 +64,7 @@ class MainActivity : Activity() {
         startActivity(intent)
     }
 
-    fun startStandardGame() {
+    private fun startStandardGame() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
         intent.putExtra(TOTAL_WELLS, 4)
         intent.putExtra(TOTAL_COLORS, 4)
@@ -62,7 +72,7 @@ class MainActivity : Activity() {
         startActivity(intent)
     }
 
-    fun startBrainBusterGame() {
+    private fun startBrainBusterGame() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
         intent.putExtra(TOTAL_WELLS, 6)
         intent.putExtra(TOTAL_COLORS, 6)

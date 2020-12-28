@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         >
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_red"
-            android:background="#aa0000"
+            android:background="#ff0000"
+            android:contentDescription="@string/select_red"
             android:layout_weight="1" />
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_blue"
-            android:background="#0000aa"
+            android:background="#0000ff"
+            android:contentDescription="@string/select_blue"
             android:layout_weight="1" />
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_green"
-            android:background="#00aa00"
+            android:background="#00ff00"
+            android:contentDescription="@string/select_green"
             android:layout_weight="1" />
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_yellow"
-            android:background="#aaaa00"
+            android:background="#ffff00"
+            android:contentDescription="@string/select_yellow"
             android:layout_weight="1" />
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_black"
             android:background="@color/black"
+            android:contentDescription="@string/select_black"
             android:layout_weight="1" />
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_white"
             android:background="@color/white"
+            android:contentDescription="@string/select_white"
             android:layout_weight="1" />
 
     <Button
             android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/choice_clear"
-            android:background="@color/gray_400"
+            android:background="#666666"
+            android:contentDescription="@string/select_no_color"
             android:layout_weight="1" />
 
 </LinearLayout>

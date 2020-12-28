@@ -2,7 +2,35 @@
     <string name="app_name">MasterMind</string>
     <string name="title_activity_play_mastermind">Play Mastermind</string>
 
-        <string name="dummy_button">Dummy Button</string>
-        <string name="dummy_content">DUMMY\nCONTENT</string>
+	<string name="select_red">Select red</string>
+	<string name="select_blue">Select blue</string>
+	<string name="select_green">Select green</string>
+	<string name="select_yellow">Select yellow</string>
+	<string name="select_black">Select black</string>
+	<string name="select_white">Select white</string>
+	<string name="select_no_color">Remove selected color</string>
+
+	<string name="first_peg">First peg</string>
+	<string name="second_peg">Second peg</string>
+	<string name="third_peg">Third peg</string>
+	<string name="fourth_peg">Fourth peg</string>
+	<string name="fifth_peg">Fifth peg</string>
+	<string name="sixth_peg">Sixth peg</string>
+
+	<string name="check_button_text">Check</string>
+
+	<string name="row_is">row is</string>
+	<string name="peg_is">peg is </string>
+
+	<string name="red">red</string>
+	<string name="blue">blue</string>
+	<string name="green">green</string>
+	<string name="yellow">yellow</string>
+	<string name="black">black</string>
+	<string name="white">white</string>
+	<string name="clear">clear</string>
+	<string name="check_my_guess">Check my guess</string>
+	<string name="black_correct">Correct colors in correct place</string>
+	<string name="white_correct">Correct pegs in wrong place</string>
 
 </resources>

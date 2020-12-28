@@ -70,6 +70,9 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
 	fun setNumber(number: Int) {
 		this.rowNumber.text = number.toString()
+
+		val rowIs = resources.getString(R.string.row_is)
+		this.rowNumber.contentDescription = "$rowIs $number.toString()"
 	}
 
 	fun setWells(wellCount: Int) {
@@ -83,17 +86,14 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
 	fun activateRow(activate: Boolean) {
 		if (activate) {
-			this.doneButton.text = "Done"
+			this.doneButton.text = resources.getString(R.string.check_button_text)
 		}
 		this.doneButton.isClickable = activate
 	}
 
 
-	override fun handleChoice(chosenPeg: PegColor) {
-
-		Toast.makeText(this.context, "Color " + chosenPeg.toString(), Toast.LENGTH_LONG)
-
+	override fun handlePegColorChoice(activePegHole: MastermindPegHole, chosenPegColor: PegColor) {
 		popupSelector?.close()
-//		TODO("Not yet implemented")
+		activePegHole.setColor(chosenPegColor)
 	}
 }

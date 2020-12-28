@@ -6,13 +6,15 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import com.chrislaforetsoftware.mm.R
+import com.chrislaforetsoftware.mm.rules.PegColor
 
 
 class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         View(context, attrs, defStyle) {
 
     var colorName = "Empty"
-    var pegColor = Color.GRAY
+    var pegColor = PegColor.Clear
     var choices = 4
 
     private var defaultBoxDimension = 20
@@ -24,12 +26,26 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
     constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {}
 
     init {
-        // Load attributes
-//        val a = context.obtainStyledAttributes(
-//            attrs, R.styleable.MastermindPegHole, defStyle, 0
-//        )
+        prepareContentDescriptionFor(pegColor)
+    }
 
-//        a.recycle()
+    private fun prepareContentDescriptionFor(pegColor: PegColor) {
+        val pegIs = resources.getString(R.string.peg_is)
+        val colorPart = getColorStringFromColor(pegColor.color)
+
+        contentDescription = "$pegIs $colorPart"
+    }
+
+    private fun getColorStringFromColor(color: String): String {
+        return when(color) {
+            PegColor.Red.color -> resources.getString(R.string.red)
+            PegColor.Blue.color -> resources.getString(R.string.blue)
+            PegColor.Green.color -> resources.getString(R.string.green)
+            PegColor.Yellow.color -> resources.getString(R.string.yellow)
+            PegColor.Black.color -> resources.getString(R.string.black)
+            PegColor.White.color -> resources.getString(R.string.white)
+            else -> resources.getString(R.string.clear)
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -50,48 +66,27 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
     fun setChoiceCount(choices: Int) {
         this.choices = choices
     }
-    fun setColor(colorName: String) {
-        this.colorName = colorName
-        pegColor = when (colorName) {
-            "Red" -> Color.RED
-            "Blue" -> Color.BLUE
-            "Yellow" -> Color.YELLOW
-            "Green" -> Color.GREEN
-            "Black" -> Color.BLACK
-            "White" -> Color.WHITE
-            else -> Color.GRAY
-        }
 
+    fun setColor(pegColor: PegColor) {
+        this.pegColor = pegColor
+
+        prepareContentDescriptionFor(pegColor)
         invalidate()
-    }
-
-    fun getCodeColor() : com.chrislaforetsoftware.mm.rules.PegColor? {
-        if (colorName.isEmpty()) {
-            return null
-        }
-        return com.chrislaforetsoftware.mm.rules.PegColor(colorName)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-//        val contentWidth = width - paddingLeft - paddingRight
-//        val contentHeight = height - paddingTop - paddingBottom
-
         val paint = Paint()
-        paint.setColor(pegColor)
+        paint.setColor(pegColor.getDisplayColor())
         paint.setStyle(Paint.Style.FILL)
 
-//        val cx = canvas.width.toFloat() / 2f;
-//        val cy = canvas.height.toFloat() / 2f;
         val sideMax = this.side * 0.8
         val padding = (this.side.toFloat() - sideMax) / 2f
         val radius = sideMax / 2f
         val cx = padding + radius
         val cy = padding + radius
 
-
         canvas.drawCircle(cx.toFloat(), cy.toFloat(), radius.toFloat(), paint)
- //       canvas.drawRect(Rect(0, 0, canvas.width, canvas.height), p)
     }
 }
