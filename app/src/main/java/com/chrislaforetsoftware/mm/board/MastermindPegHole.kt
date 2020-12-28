@@ -6,8 +6,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import android.widget.TextView
-import kotlin.math.min
 
 
 class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
@@ -62,11 +60,11 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         invalidate()
     }
 
-    fun getCodeColor() : com.chrislaforetsoftware.mm.rules.Color? {
+    fun getCodeColor() : com.chrislaforetsoftware.mm.rules.PegColor? {
         if (colorName.isEmpty()) {
             return null
         }
-        return com.chrislaforetsoftware.mm.rules.Color(colorName)
+        return com.chrislaforetsoftware.mm.rules.PegColor(colorName)
     }
 
     override fun onDraw(canvas: Canvas) {

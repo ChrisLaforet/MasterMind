@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.chrislaforetsoftware.mm.R
+import com.chrislaforetsoftware.mm.rules.PegColor
 
 
-class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle) {
+class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle), ChoiceListener {
 //	class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : View(context, attrs, defStyle) {
 
 	constructor(context: Context) : this(context, null, 0) {}
@@ -33,15 +35,23 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 		inflate(this.context, R.layout.mastermind_pegrow, this)
 
 		rowNumber = findViewById<TextView>(R.id.row_number)
-		peg0 = findViewById<MastermindPegHole>(R.id.peg_0)
-		peg1 = findViewById<MastermindPegHole>(R.id.peg_1)
-		peg2 = findViewById<MastermindPegHole>(R.id.peg_2)
-		peg3 = findViewById<MastermindPegHole>(R.id.peg_3)
-		peg4 = findViewById<MastermindPegHole>(R.id.peg_4)
-		peg5 = findViewById<MastermindPegHole>(R.id.peg_5)
+		peg0 = preparePegHole(R.id.peg_0)
+		peg1 = preparePegHole(R.id.peg_1)
+		peg2 = preparePegHole(R.id.peg_2)
+		peg3 = preparePegHole(R.id.peg_3)
+		peg4 = preparePegHole(R.id.peg_4)
+		peg5 = preparePegHole(R.id.peg_5)
 		doneButton = findViewById<Button>(R.id.row_done)
 		blackCount = findViewById<TextView>(R.id.black_count)
 		whiteCount = findViewById<TextView>(R.id.white_count)
+	}
+
+	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
+		val peg = findViewById<MastermindPegHole>(pegHoleId)
+		peg.setOnClickListener {
+			val selector = MastermindSelector(this.context, peg, this)
+		}
+		return peg
 	}
 
 	fun setNumber(number: Int) {
@@ -57,4 +67,17 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 		peg5.visibility = GONE
 	}
 
+	fun activateRow(activate: Boolean) {
+		if (activate) {
+			this.doneButton.text = "Done"
+		}
+		this.doneButton.isClickable = activate
+	}
+
+
+	override fun handleChoice(chosenPeg: PegColor) {
+
+		Toast.makeText(this.context, "Color " + chosenPeg.toString(), Toast.LENGTH_LONG)
+//		TODO("Not yet implemented")
+	}
 }

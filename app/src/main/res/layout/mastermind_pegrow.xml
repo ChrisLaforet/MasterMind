@@ -77,7 +77,8 @@
             android:id="@+id/row_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done"
+            android:text="- - - -"
+            android:clickable="false"
             android:layout_weight="1"
             />
 

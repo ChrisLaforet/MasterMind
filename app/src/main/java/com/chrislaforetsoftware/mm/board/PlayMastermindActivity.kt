@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.chrislaforetsoftware.mm.R
+import com.chrislaforetsoftware.mm.rules.PegColor
 
 
 class PlayMastermindActivity : Activity() {
@@ -50,44 +51,36 @@ class PlayMastermindActivity : Activity() {
         totalColors = intent.getIntExtra(TOTAL_COLORS, 6)
         allowDuplicateColors = intent.getBooleanExtra(ALLOW_DUPLICATE_COLORS, false)
 
-        row0 = findViewById<MastermindPegRow>(R.id.peg_row_0)
-        row0.setNumber(1)
-        row1 = findViewById<MastermindPegRow>(R.id.peg_row_1)
-        row1.setNumber(2)
-        row2 = findViewById<MastermindPegRow>(R.id.peg_row_2)
-        row2.setNumber(3)
-        row3 = findViewById<MastermindPegRow>(R.id.peg_row_3)
-        row3.setNumber(4)
-        row4 = findViewById<MastermindPegRow>(R.id.peg_row_4)
-        row4.setNumber(5)
-        row5 = findViewById<MastermindPegRow>(R.id.peg_row_5)
-        row5.setNumber(6)
-        row6 = findViewById<MastermindPegRow>(R.id.peg_row_6)
-        row6.setNumber(7)
-        row7 = findViewById<MastermindPegRow>(R.id.peg_row_7)
-        row7.setNumber(8)
-        row8 = findViewById<MastermindPegRow>(R.id.peg_row_8)
-        row8.setNumber(9)
-        row9 = findViewById<MastermindPegRow>(R.id.peg_row_9)
-        row9.setNumber(10)
+        val is6Well = totalWells == 6
+        row0 = preparePegRow(R.id.peg_row_0, 1, is6Well)
+        row1 = preparePegRow(R.id.peg_row_1, 2, is6Well)
+        row2 = preparePegRow(R.id.peg_row_2, 3, is6Well)
+        row3 = preparePegRow(R.id.peg_row_3, 4, is6Well)
+        row4 = preparePegRow(R.id.peg_row_4, 5, is6Well)
+        row5 = preparePegRow(R.id.peg_row_5, 6, is6Well)
+        row6 = preparePegRow(R.id.peg_row_6, 7, is6Well)
+        row7 = preparePegRow(R.id.peg_row_7, 8, is6Well)
+        row8 = preparePegRow(R.id.peg_row_8, 9, is6Well)
+        row9 = preparePegRow(R.id.peg_row_9, 10, is6Well)
 
-        if (totalWells != MAX_WELLS) {
-            row0.setWells(4)
-            row1.setWells(4)
-            row2.setWells(4)
-            row3.setWells(4)
-            row4.setWells(4)
-            row5.setWells(4)
-            row6.setWells(4)
-            row7.setWells(4)
-            row8.setWells(4)
-            row9.setWells(4)
-        }
 
+        // generate the code
+
+        // start the game clock
+        // Create clock here
+
+        row0.activateRow(true)
+    }
+
+    private fun preparePegRow(rowId: Int, rowNumber: Int, is6Well: Boolean): MastermindPegRow {
+        val row = findViewById<MastermindPegRow>(rowId)
+        row.setWells(if (is6Well) 6 else 4)
+        row.setNumber(rowNumber)
+        return row
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
 
     }
- }
+}
