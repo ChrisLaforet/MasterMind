@@ -3,6 +3,8 @@ package com.chrislaforetsoftware.mm.board
 import android.app.Activity
 import android.os.Bundle
 import com.chrislaforetsoftware.mm.R
+import com.chrislaforetsoftware.mm.rules.PegColor
+import java.util.*
 
 
 class PlayMastermindActivity : Activity() {
@@ -21,6 +23,8 @@ class PlayMastermindActivity : Activity() {
     private lateinit var row7: MastermindPegRow
     private lateinit var row8: MastermindPegRow
     private lateinit var row9: MastermindPegRow
+
+    private var codeToMatch: List<PegColor> = listOf()
 
     companion object {
         const val TOTAL_WELLS = "totalWells"
@@ -57,8 +61,7 @@ class PlayMastermindActivity : Activity() {
         row8 = preparePegRow(R.id.peg_row_8, 9, is6Well)
         row9 = preparePegRow(R.id.peg_row_9, 10, is6Well)
 
-
-        // generate the code
+        generateCodeToMatch()
 
         // start the game clock
         // Create clock here
@@ -72,5 +75,14 @@ class PlayMastermindActivity : Activity() {
         row.setNumber(rowNumber)
         row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         return row
+    }
+
+    private fun generateCodeToMatch() {
+        val rng = Random()
+
+        for () {
+            val offset = rng.nextInt()
+        }
+
     }
 }
