@@ -3,10 +3,7 @@ package com.chrislaforetsoftware.mm
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.Window
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import com.chrislaforetsoftware.mm.board.PlayMastermindActivity
 import com.chrislaforetsoftware.mm.board.PlayMastermindActivity.Companion.ALLOW_DUPLICATE_COLORS
 import com.chrislaforetsoftware.mm.board.PlayMastermindActivity.Companion.TOTAL_COLORS
@@ -50,32 +47,32 @@ class MainActivity : Activity() {
 
     private fun startBeginner4x4Game() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
-        intent.putExtra(TOTAL_WELLS, 4)
-        intent.putExtra(TOTAL_COLORS, 4)
+        intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.BASIC_WELLS)
+        intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.REDUCED_COLORS)
         intent.putExtra(ALLOW_DUPLICATE_COLORS, false)
         startActivity(intent)
     }
 
     private fun startBeginner6x4Game() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
-        intent.putExtra(TOTAL_WELLS, 4)
-        intent.putExtra(TOTAL_COLORS, 6)
+        intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.BASIC_WELLS)
+        intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.BASIC_COLORS)
         intent.putExtra(ALLOW_DUPLICATE_COLORS, false)
         startActivity(intent)
     }
 
     private fun startStandardGame() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
-        intent.putExtra(TOTAL_WELLS, 4)
-        intent.putExtra(TOTAL_COLORS, 4)
+        intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.BASIC_WELLS)
+        intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.BASIC_COLORS)
         intent.putExtra(ALLOW_DUPLICATE_COLORS, true)
         startActivity(intent)
     }
 
     private fun startBrainBusterGame() {
         val intent = Intent(this, PlayMastermindActivity::class.java)
-        intent.putExtra(TOTAL_WELLS, 6)
-        intent.putExtra(TOTAL_COLORS, 6)
+        intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.MAX_WELLS)
+        intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.BASIC_COLORS)
         intent.putExtra(ALLOW_DUPLICATE_COLORS, true)
         startActivity(intent)
     }

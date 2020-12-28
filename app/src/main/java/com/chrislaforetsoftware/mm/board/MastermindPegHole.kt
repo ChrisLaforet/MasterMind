@@ -2,7 +2,6 @@ package com.chrislaforetsoftware.mm.board
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
@@ -13,17 +12,15 @@ import com.chrislaforetsoftware.mm.rules.PegColor
 class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         View(context, attrs, defStyle) {
 
-    var colorName = "Empty"
-    var pegColor = PegColor.Clear
+    constructor(context: Context) : this(context, null, 0)
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
+
+
+    private var pegColor = PegColor.Clear
     var choices = 4
 
     private var defaultBoxDimension = 20
     private var side: Int = defaultBoxDimension
-
-
-    constructor(context: Context) : this(context, null, 0) {}
-
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {}
 
     init {
         prepareContentDescriptionFor(pegColor)
@@ -59,12 +56,8 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
             MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> height = MeasureSpec.getSize(heightMeasureSpec)
             MeasureSpec.UNSPECIFIED -> height = defaultBoxDimension
         }
-        this.side = Math.max(width, height)
+        this.side = width.coerceAtLeast(height)
         setMeasuredDimension(this.side, this.side)
-    }
-
-    fun setChoiceCount(choices: Int) {
-        this.choices = choices
     }
 
     fun setColor(pegColor: PegColor) {
@@ -78,8 +71,8 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         super.onDraw(canvas)
 
         val paint = Paint()
-        paint.setColor(pegColor.getDisplayColor())
-        paint.setStyle(Paint.Style.FILL)
+        paint.color = pegColor.getDisplayColor()
+        paint.style = Paint.Style.FILL
 
         val sideMax = this.side * 0.8
         val padding = (this.side.toFloat() - sideMax) / 2f

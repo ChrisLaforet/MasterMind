@@ -1,18 +1,8 @@
 package com.chrislaforetsoftware.mm.board
 
-import androidx.appcompat.app.AppCompatActivity
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
-import android.os.Handler
-import android.view.MotionEvent
-import android.view.View
-import android.view.Window
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.chrislaforetsoftware.mm.R
-import com.chrislaforetsoftware.mm.rules.PegColor
 
 
 class PlayMastermindActivity : Activity() {
@@ -22,15 +12,15 @@ class PlayMastermindActivity : Activity() {
     private var allowDuplicateColors: Boolean = false
 
     private lateinit var row0: MastermindPegRow
-    private lateinit var row1: MastermindPegRow;
-    private lateinit var row2: MastermindPegRow;
-    private lateinit var row3: MastermindPegRow;
-    private lateinit var row4: MastermindPegRow;
-    private lateinit var row5: MastermindPegRow;
-    private lateinit var row6: MastermindPegRow;
-    private lateinit var row7: MastermindPegRow;
-    private lateinit var row8: MastermindPegRow;
-    private lateinit var row9: MastermindPegRow;
+    private lateinit var row1: MastermindPegRow
+    private lateinit var row2: MastermindPegRow
+    private lateinit var row3: MastermindPegRow
+    private lateinit var row4: MastermindPegRow
+    private lateinit var row5: MastermindPegRow
+    private lateinit var row6: MastermindPegRow
+    private lateinit var row7: MastermindPegRow
+    private lateinit var row8: MastermindPegRow
+    private lateinit var row9: MastermindPegRow
 
     companion object {
         const val TOTAL_WELLS = "totalWells"
@@ -38,6 +28,10 @@ class PlayMastermindActivity : Activity() {
         const val ALLOW_DUPLICATE_COLORS = "allowDuplicateColors"
 
         const val MAX_WELLS = 6
+        const val BASIC_WELLS = 4
+
+        const val BASIC_COLORS = 6
+        const val REDUCED_COLORS = 4
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,11 +41,11 @@ class PlayMastermindActivity : Activity() {
 
         setContentView(R.layout.activity_play_mastermind)
 
-        totalWells = intent.getIntExtra(TOTAL_WELLS, 4)
-        totalColors = intent.getIntExtra(TOTAL_COLORS, 6)
+        totalWells = intent.getIntExtra(TOTAL_WELLS, BASIC_WELLS)
+        totalColors = intent.getIntExtra(TOTAL_COLORS, BASIC_COLORS)
         allowDuplicateColors = intent.getBooleanExtra(ALLOW_DUPLICATE_COLORS, false)
 
-        val is6Well = totalWells == 6
+        val is6Well = totalWells == MAX_WELLS
         row0 = preparePegRow(R.id.peg_row_0, 1, is6Well)
         row1 = preparePegRow(R.id.peg_row_1, 2, is6Well)
         row2 = preparePegRow(R.id.peg_row_2, 3, is6Well)
@@ -74,9 +68,9 @@ class PlayMastermindActivity : Activity() {
 
     private fun preparePegRow(rowId: Int, rowNumber: Int, is6Well: Boolean): MastermindPegRow {
         val row = findViewById<MastermindPegRow>(rowId)
-        row.setWells(if (is6Well) 6 else 4)
+        row.setWells(if (is6Well) MAX_WELLS else BASIC_WELLS)
         row.setNumber(rowNumber)
-        row.setChoices(if (totalColors == 4) 4 else 6)
+        row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         return row
     }
 

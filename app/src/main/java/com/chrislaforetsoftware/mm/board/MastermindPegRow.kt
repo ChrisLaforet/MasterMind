@@ -2,13 +2,9 @@ package com.chrislaforetsoftware.mm.board
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.PegColor
 
@@ -16,20 +12,19 @@ import com.chrislaforetsoftware.mm.rules.PegColor
 class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle), ChoiceListener {
 //	class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : View(context, attrs, defStyle) {
 
-	constructor(context: Context) : this(context, null, 0) {}
+	constructor(context: Context) : this(context, null, 0)
+	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
-	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {}
-
-	private lateinit var rowNumber: TextView
-	private lateinit var peg0: MastermindPegHole
-	private lateinit var peg1: MastermindPegHole
-	private lateinit var peg2: MastermindPegHole
-	private lateinit var peg3: MastermindPegHole
-	private lateinit var peg4: MastermindPegHole
-	private lateinit var peg5: MastermindPegHole
-	private lateinit var doneButton: Button
-	private lateinit var blackCount: TextView
-	private lateinit var whiteCount: TextView
+	private var rowNumber: TextView
+	private var peg0: MastermindPegHole
+	private var peg1: MastermindPegHole
+	private var peg2: MastermindPegHole
+	private var peg3: MastermindPegHole
+	private  var peg4: MastermindPegHole
+	private var peg5: MastermindPegHole
+	private var doneButton: Button
+	private var blackCount: TextView
+	private var whiteCount: TextView
 
 	private var choices = 6
 
