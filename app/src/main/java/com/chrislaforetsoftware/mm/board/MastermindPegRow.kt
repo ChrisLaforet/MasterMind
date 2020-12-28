@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.chrislaforetsoftware.mm.R
@@ -24,6 +25,9 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	private lateinit var peg3: MastermindPegHole
 	private lateinit var peg4: MastermindPegHole
 	private lateinit var peg5: MastermindPegHole
+	private lateinit var doneButton: Button
+	private lateinit var blackCount: TextView
+	private lateinit var whiteCount: TextView
 
 	init {
 		inflate(this.context, R.layout.mastermind_pegrow, this)
@@ -35,6 +39,9 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 		peg3 = findViewById<MastermindPegHole>(R.id.peg_3)
 		peg4 = findViewById<MastermindPegHole>(R.id.peg_4)
 		peg5 = findViewById<MastermindPegHole>(R.id.peg_5)
+		doneButton = findViewById<Button>(R.id.row_done)
+		blackCount = findViewById<TextView>(R.id.black_count)
+		whiteCount = findViewById<TextView>(R.id.white_count)
 	}
 
 	fun setNumber(number: Int) {
@@ -46,6 +53,8 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 			return
 		}
 
+		peg4.visibility = GONE
+		peg5.visibility = GONE
 	}
 
 }

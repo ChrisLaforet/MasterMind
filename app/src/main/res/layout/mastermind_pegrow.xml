@@ -68,6 +68,19 @@
             android:textAlignment="center"
             />
 
+    <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+             />
+
+    <Button
+            android:id="@+id/row_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:layout_weight="1"
+            />
+
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -83,6 +96,7 @@
             android:layout_weight="1"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:visibility="gone"
             />
 
     <EditText
@@ -100,7 +114,6 @@
             android:layout_weight="1"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:visibility="gone"
             />
-
-
 </LinearLayout>
