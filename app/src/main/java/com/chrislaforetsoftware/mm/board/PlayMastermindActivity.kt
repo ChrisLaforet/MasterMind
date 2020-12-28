@@ -73,9 +73,4 @@ class PlayMastermindActivity : Activity() {
         row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         return row
     }
-
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-
-    }
 }
