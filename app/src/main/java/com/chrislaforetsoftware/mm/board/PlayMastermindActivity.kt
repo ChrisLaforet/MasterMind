@@ -76,6 +76,7 @@ class PlayMastermindActivity : Activity() {
         val row = findViewById<MastermindPegRow>(rowId)
         row.setWells(if (is6Well) 6 else 4)
         row.setNumber(rowNumber)
+        row.setChoices(if (totalColors == 4) 4 else 6)
         return row
     }
 

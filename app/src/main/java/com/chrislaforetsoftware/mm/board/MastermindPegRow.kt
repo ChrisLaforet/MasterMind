@@ -31,6 +31,10 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	private lateinit var blackCount: TextView
 	private lateinit var whiteCount: TextView
 
+	private var choices = 6
+
+	private var popupSelector: MastermindSelector? = null
+
 	init {
 		inflate(this.context, R.layout.mastermind_pegrow, this)
 
@@ -49,9 +53,19 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
 		val peg = findViewById<MastermindPegHole>(pegHoleId)
 		peg.setOnClickListener {
-			val selector = MastermindSelector(this.context, peg, this)
+			popupSelector = MastermindSelector(this.context, peg, this)
 		}
 		return peg
+	}
+
+	fun setChoices(choices: Int) {
+		this.choices = choices
+		peg0.choices = choices
+		peg1.choices = choices
+		peg2.choices = choices
+		peg3.choices = choices
+		peg4.choices = choices
+		peg5.choices = choices
 	}
 
 	fun setNumber(number: Int) {
@@ -78,6 +92,8 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	override fun handleChoice(chosenPeg: PegColor) {
 
 		Toast.makeText(this.context, "Color " + chosenPeg.toString(), Toast.LENGTH_LONG)
+
+		popupSelector?.close()
 //		TODO("Not yet implemented")
 	}
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
@@ -34,16 +35,23 @@ class MastermindSelector(context: Context, choiceButton: MastermindPegHole, val 
         choice_white = prepareChoiceButton(popupView, R.id.choice_white, PegColor.White)
         choice_clear = prepareChoiceButton(popupView, R.id.choice_clear, PegColor.Clear)
 
+        if (choiceButton.choices == 4) {
+            choice_black.visibility = GONE
+            choice_white.visibility = GONE
+        }
+
         // https://developer.android.com/reference/android/widget/PopupWindow
         // https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
         // https://stackoverflow.com/questions/16818146/android-popupwindow-above-a-specific-view
+
+        val unitSize = 2 * choiceButton.height / 3
         val focusable = true        // lets taps outside the popup also dismiss it
         popup = PopupWindow(popupView,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 focusable)
-
-        popup.showAsDropDown(choiceButton, 0, -1 * (choiceButton.height + popupView.height))
+        popup.showAsDropDown(choiceButton, 0, -1 * (choiceButton.height + unitSize))
+        popup.update(unitSize * (choiceButton.choices + 1), unitSize)
     }
 
     private fun prepareChoiceButton(popupView: View, choiceId: Int, peg: PegColor): Button {
@@ -52,6 +60,10 @@ class MastermindSelector(context: Context, choiceButton: MastermindPegHole, val 
             this.listener.handleChoice(peg)
         }
         return button
+    }
+
+    fun close() {
+        this.popup.dismiss()
     }
 }
 

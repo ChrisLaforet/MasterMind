@@ -13,9 +13,11 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
 
     var colorName = "Empty"
     var pegColor = Color.GRAY
+    var choices = 4
 
     private var defaultBoxDimension = 20
     private var side: Int = defaultBoxDimension
+
 
     constructor(context: Context) : this(context, null, 0) {}
 
@@ -45,6 +47,9 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         setMeasuredDimension(this.side, this.side)
     }
 
+    fun setChoiceCount(choices: Int) {
+        this.choices = choices
+    }
     fun setColor(colorName: String) {
         this.colorName = colorName
         pegColor = when (colorName) {
