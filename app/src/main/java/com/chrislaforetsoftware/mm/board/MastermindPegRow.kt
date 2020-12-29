@@ -1,5 +1,6 @@
 package com.chrislaforetsoftware.mm.board
 
+import android.app.AlertDialog
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.Button
@@ -7,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.PegColor
+import com.chrislaforetsoftware.mm.rules.Response
 
 
 class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle), ChoiceListener {
@@ -20,13 +22,17 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	private var peg1: MastermindPegHole
 	private var peg2: MastermindPegHole
 	private var peg3: MastermindPegHole
-	private  var peg4: MastermindPegHole
+	private var peg4: MastermindPegHole
 	private var peg5: MastermindPegHole
 	private var doneButton: Button
 	private var blackCount: TextView
 	private var whiteCount: TextView
 
-	private var choices = 6
+	private var row: Int = 0
+	private var choices = PlayMastermindActivity.BASIC_COLORS
+	private var totalWells = PlayMastermindActivity.BASIC_WELLS
+	private var activeWells: List<MastermindPegHole> = listOf()
+	private var parentCallback: PegRowComplete? = null
 
 	private var popupSelector: MastermindSelector? = null
 
@@ -46,11 +52,7 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	}
 
 	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
-		val peg = findViewById<MastermindPegHole>(pegHoleId)
-		peg.setOnClickListener {
-			popupSelector = MastermindSelector(this.context, peg, this)
-		}
-		return peg
+		return findViewById<MastermindPegHole>(pegHoleId)
 	}
 
 	fun setChoices(choices: Int) {
@@ -64,31 +66,103 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	}
 
 	fun setNumber(number: Int) {
-		this.rowNumber.text = number.toString()
+		this.row = number
+		this.rowNumber.text = this.row.toString()
 
 		val rowIs = resources.getString(R.string.row_is)
-		this.rowNumber.contentDescription = "$rowIs $number.toString()"
+		this.rowNumber.contentDescription = "$rowIs $this.row.toString()"
+	}
+
+	fun registerCheckPlay(parentCallback: PegRowComplete) {
+		this.parentCallback = parentCallback
 	}
 
 	fun setWells(wellCount: Int) {
-		if (wellCount == 6) {
-			return
-		}
+		this.totalWells = wellCount
 
-		peg4.visibility = GONE
-		peg5.visibility = GONE
+		val wells = mutableListOf<MastermindPegHole>()
+		wells.add(peg0)
+		wells.add(peg1)
+		wells.add(peg2)
+		wells.add(peg3)
+		if (wellCount == PlayMastermindActivity.MAX_WELLS) {
+			wells.add(peg4)
+			wells.add(peg5)
+		} else {
+			peg4.visibility = GONE
+			peg5.visibility = GONE
+		}
+		activeWells = wells.toList()
 	}
 
 	fun activateRow(activate: Boolean) {
 		if (activate) {
 			this.doneButton.text = resources.getString(R.string.check_button_text)
+
+			this.doneButton.setOnClickListener {
+				if (areAllWellsFilled()) {
+					parentCallback?.checkPlay(this, getPegs())
+				} else {
+					showCheckCannotBeCompletedAlert()
+				}
+			}
+
+			activeWells.forEach {
+				val peg: MastermindPegHole = it as MastermindPegHole
+				it.setOnClickListener {
+					popupSelector = MastermindSelector(this.context, peg, this)
+				}
+			}
 		}
 		this.doneButton.isClickable = activate
 	}
 
+	fun setResults(response: Response) {
+		this.doneButton.visibility = GONE
+		this.blackCount.visibility = VISIBLE
+		this.blackCount.text = response.matchCorrect.toString()
+		this.whiteCount.visibility = VISIBLE
+		this.whiteCount.text = response.colorCorrect.toString()
+
+		activeWells.forEach {
+			it.setOnClickListener {
+			}
+		}
+	}
+
+	private fun areAllWellsFilled(): Boolean {
+		activeWells.forEach {
+			if (it.getColor() == PegColor.Clear) {
+				return false
+			}
+		}
+		return true
+	}
+
+	private fun getPegs(): List<PegColor> {
+		val pegs = mutableListOf<PegColor>()
+		activeWells.forEach {
+			pegs.add(it.getColor())
+		}
+		return pegs.toList()
+	}
+
+	private fun showCheckCannotBeCompletedAlert() {
+		val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this.context)
+		alertDialog.setMessage("All the pegs must have a selction before the row can be checked")
+		alertDialog.setPositiveButton("OK") { _, _ -> }
+
+		val alert: AlertDialog = alertDialog.create()
+		alert.setCanceledOnTouchOutside(true)
+		alert.show()
+	}
 
 	override fun handlePegColorChoice(activePegHole: MastermindPegHole, chosenPegColor: PegColor) {
 		popupSelector?.close()
 		activePegHole.setColor(chosenPegColor)
 	}
+}
+
+interface PegRowComplete {
+	fun checkPlay(row: MastermindPegRow, pegs: List<PegColor>)
 }

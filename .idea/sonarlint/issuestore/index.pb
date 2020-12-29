@@ -39,3 +39,5 @@ L
 .idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
 w
 Gapp/src/main/java/com/chrislaforetsoftware/mm/board/MastermindPegRow.kt,0\2\0208d24c6bd452dfc9363e433cfd0992fc1d5319
+y
+Iapp/src/main/java/com/chrislaforetsoftware/mm/board/MastermindSelector.kt,6\2\6222a156db7f8cf85a0b101bf763ec9632e0b020

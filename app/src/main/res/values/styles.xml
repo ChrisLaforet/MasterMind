@@ -5,7 +5,7 @@
     </style>
 
     <style name="Widget.Theme.MasterMind.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">#bb333333</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
 

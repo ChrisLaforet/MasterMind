@@ -67,6 +67,10 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
         invalidate()
     }
 
+    fun getColor(): PegColor {
+        return this.pegColor
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
