@@ -23,7 +23,7 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 	private var activeWells: List<MastermindPegHole> = listOf()
 
 	init {
-		inflate(this.context, R.layout.mastermind_pegrow, this)
+		inflate(this.context, R.layout.mastermind_coderow, this)
 
 		peg0 = preparePegHole(R.id.peg_0)
 		peg1 = preparePegHole(R.id.peg_1)
