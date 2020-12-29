@@ -108,7 +108,7 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 			}
 
 			activeWells.forEach {
-				val peg: MastermindPegHole = it as MastermindPegHole
+				val peg: MastermindPegHole = it
 				it.setOnClickListener {
 					popupSelector = MastermindSelector(this.context, peg, this)
 				}
