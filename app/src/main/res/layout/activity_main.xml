@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Beginner 4-color/4-wells"
+                android:text="Beginner 4-color-nodup/4-wells"
                 android:textColor="@color/black"
                 android:background="#2E9132"
             />
@@ -62,7 +62,7 @@
                     android:padding="5dp"
                     android:text="Beginner 6-color/4-wells"
                     android:textColor="@color/black"
-                    android:background="#2E9132"
+                    android:background="#44AA44"
                     />
     </TableRow>
 
@@ -82,6 +82,24 @@
                 android:text="Regular Mastermind"
                 android:textColor="@color/black"
                 android:background="#FFEB3B" />
+    </TableRow>
+
+    <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+        <Button
+                android:id="@+id/challenger_6by6_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Challenge 6-color-nodup/6-well"
+                android:textColor="@color/black"
+                android:background="#aa6600"
+                />
     </TableRow>
 
     <TableRow

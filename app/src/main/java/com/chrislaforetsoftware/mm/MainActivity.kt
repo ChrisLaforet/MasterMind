@@ -39,6 +39,11 @@ class MainActivity : Activity() {
             startStandardGame()
         }
 
+        button = findViewById(R.id.challenger_6by6_button) as? Button
+        button?.setOnClickListener()  {
+            startChallengerGame()
+        }
+
         button = findViewById(R.id.brainbuster_6by6_button) as? Button
         button?.setOnClickListener()  {
             startBrainBusterGame()
@@ -66,6 +71,14 @@ class MainActivity : Activity() {
         intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.BASIC_WELLS)
         intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.BASIC_COLORS)
         intent.putExtra(ALLOW_DUPLICATE_COLORS, true)
+        startActivity(intent)
+    }
+
+    private fun startChallengerGame() {
+        val intent = Intent(this, PlayMastermindActivity::class.java)
+        intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.MAX_WELLS)
+        intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.BASIC_COLORS)
+        intent.putExtra(ALLOW_DUPLICATE_COLORS, false)
         startActivity(intent)
     }
 

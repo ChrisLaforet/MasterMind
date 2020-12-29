@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/peg_row"
+        style="@style/Widget.Theme.MasterMind.CodeBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        >
+
+    <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+
+    <com.chrislaforetsoftware.mm.board.MastermindPegHole
+            android:id="@+id/peg_0"
+            android:layout_width="50dp"
+            android:layout_height = "50dp"
+            android:contentDescription="@string/first_peg"
+            />
+
+    <com.chrislaforetsoftware.mm.board.MastermindPegHole
+            android:id="@+id/peg_1"
+            android:layout_width="50dp"
+            android:layout_height = "50dp"
+            android:contentDescription="@string/second_peg"
+            />
+
+    <com.chrislaforetsoftware.mm.board.MastermindPegHole
+            android:id="@+id/peg_2"
+            android:layout_width="50dp"
+            android:layout_height = "50dp"
+            android:contentDescription="@string/third_peg"
+            />
+
+    <com.chrislaforetsoftware.mm.board.MastermindPegHole
+            android:id="@+id/peg_3"
+            android:layout_width="50dp"
+            android:layout_height = "50dp"
+            android:contentDescription="@string/fourth_peg"
+            />
+
+    <com.chrislaforetsoftware.mm.board.MastermindPegHole
+            android:id="@+id/peg_4"
+            android:layout_width="50dp"
+            android:layout_height = "50dp"
+            android:contentDescription="@string/fifth_peg"
+            />
+
+    <com.chrislaforetsoftware.mm.board.MastermindPegHole
+            android:id="@+id/peg_5"
+            android:layout_width="50dp"
+            android:layout_height = "50dp"
+            android:contentDescription="@string/sixth_peg"
+            />
+
+    <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+             />
+</LinearLayout>

@@ -15,11 +15,18 @@
             android:weightSum="100">
 
         <Button
+                android:id="@+id/top_bar"
                 android:text="Placeholder until later"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
                 android:layout_weight="12" />
+
+        <com.chrislaforetsoftware.mm.board.MastermindCodeRow
+                android:id="@+id/code_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+            />
 
         <com.chrislaforetsoftware.mm.board.MastermindPegRow
                 android:id="@+id/peg_row_9"

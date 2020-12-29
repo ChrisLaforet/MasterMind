@@ -3,6 +3,9 @@ package com.chrislaforetsoftware.mm.board
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.Button
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.Code
 import com.chrislaforetsoftware.mm.rules.PegColor
@@ -26,6 +29,9 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
     private lateinit var row7: MastermindPegRow
     private lateinit var row8: MastermindPegRow
     private lateinit var row9: MastermindPegRow
+    private lateinit var topBar: Button
+    private lateinit var codeRow: MastermindCodeRow
+
 
     private lateinit var rows: List<MastermindPegRow>
     private var currentActiveRow: Int = 0
@@ -77,6 +83,9 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         row8 = preparePegRow(R.id.peg_row_8, 9, is6Well)
         row9 = preparePegRow(R.id.peg_row_9, 10, is6Well)
 
+        topBar = findViewById<Button>(R.id.top_bar)
+        codeRow = prepareCodeRow(is6Well)
+
         val allRows = mutableListOf<MastermindPegRow>()
         allRows.add(row0)
         allRows.add(row1)
@@ -98,6 +107,12 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         row.setNumber(rowNumber)
         row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         row.registerCheckPlay(this)
+        return row
+    }
+
+    private fun prepareCodeRow(is6Well: Boolean): MastermindCodeRow {
+        val row = findViewById<MastermindCodeRow>(R.id.code_row)
+        row.setWells(if (is6Well) MAX_WELLS else BASIC_WELLS)
         return row
     }
 
@@ -130,12 +145,13 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
     }
 
     override fun checkPlay(row: MastermindPegRow, pegs: List<PegColor>) {
-        val response = codeToMatch?.checkGuess(pegs)
-        checkNotNull(response) { "Response cannot be null while checking play values" }
+        val code = checkNotNull(codeToMatch) { "Code cannot be null while checking play values" }
+
+        val response = code.checkGuess(pegs)
         row.setResults(response)
 
         if (response.matchCorrect == totalWells) {
-            // success!
+            showCode(code)
             showSuccessAlert()
             return
         }
@@ -144,9 +160,15 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         if (currentActiveRow < rows.size) {
             rows[currentActiveRow].activateRow(true)
         } else {
-            // failed - show code and finalized - expose the code at the top
+            showCode(code)
             showFailureAlert()
         }
+    }
+
+    private fun showCode(code: Code) {
+        topBar.visibility = GONE
+        codeRow.visibility = VISIBLE
+        codeRow.setCodeColors(code.colors)
     }
 
     private fun showSuccessAlert() {
@@ -160,7 +182,6 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         alert.setCanceledOnTouchOutside(true)
         alert.show()
     }
-
 
     private fun showFailureAlert() {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
