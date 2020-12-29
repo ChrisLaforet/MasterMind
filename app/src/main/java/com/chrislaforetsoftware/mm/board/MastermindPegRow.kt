@@ -149,8 +149,8 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
 	private fun showCheckCannotBeCompletedAlert() {
 		val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this.context)
-		alertDialog.setMessage("All the pegs must have a selction before the row can be checked")
-		alertDialog.setPositiveButton("OK") { _, _ -> }
+		alertDialog.setMessage(R.string.all_pegs_must_be_set)
+		alertDialog.setPositiveButton(R.string.ok) { _, _ -> }
 
 		val alert: AlertDialog = alertDialog.create()
 		alert.setCanceledOnTouchOutside(true)

@@ -33,4 +33,17 @@
 	<string name="black_correct">Correct colors in correct place</string>
 	<string name="white_correct">Correct pegs in wrong place</string>
 
+	<string name="ok">Ok</string>
+	<string name="cancel">Cancel</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+
+	<string name="all_pegs_must_be_set">All the pegs must have a selction before the row can be checked</string>
+
+	<string name="you_won">Congratulations! You won!</string>
+	<string name="won_prompt">You have successfully broken the selected code!  Do you want to play again?</string>
+
+	<string name="you_lost">Sorry, you lost!</string>
+	<string name="lost_prompt">The code-maker has won this time around! Do you want to try again?</string>
+
 </resources>

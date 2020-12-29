@@ -3,7 +3,6 @@ package com.chrislaforetsoftware.mm.board
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.Code
 import com.chrislaforetsoftware.mm.rules.PegColor
@@ -56,7 +55,7 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
 
         prepareRows()
 
-        var code = generateCodeToMatch()
+        val code = generateCodeToMatch()
         codeToMatch = Code(code)
 
         // start the game clock
@@ -145,15 +144,30 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         if (currentActiveRow < rows.size) {
             rows[currentActiveRow].activateRow(true)
         } else {
-            // failed - show code and finalized
+            // failed - show code and finalized - expose the code at the top
+            showFailureAlert()
         }
     }
 
     private fun showSuccessAlert() {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
-        alertDialog.setTitle("You won!")
-        alertDialog.setMessage("You have successfully broken the selected code!")
-        alertDialog.setPositiveButton("OK") { _, _ -> }
+        alertDialog.setTitle(R.string.you_won)
+        alertDialog.setMessage(R.string.won_prompt)
+        alertDialog.setPositiveButton(R.string.yes) { _, _ -> this.recreate() }
+        alertDialog.setNegativeButton(R.string.no) { _, _ -> this.finish() }
+
+        val alert: AlertDialog = alertDialog.create()
+        alert.setCanceledOnTouchOutside(true)
+        alert.show()
+    }
+
+
+    private fun showFailureAlert() {
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        alertDialog.setTitle(R.string.you_lost)
+        alertDialog.setMessage(R.string.lost_prompt)
+        alertDialog.setPositiveButton(R.string.yes) { _, _ -> this.recreate() }
+        alertDialog.setNegativeButton(R.string.no) { _, _ -> this.finish() }
 
         val alert: AlertDialog = alertDialog.create()
         alert.setCanceledOnTouchOutside(true)
