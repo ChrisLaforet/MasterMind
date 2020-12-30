@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.PegColor
@@ -15,12 +16,13 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
-
     private var pegColor = PegColor.Clear
     var choices = 4
 
     private var defaultBoxDimension = 20
-    private var side: Int = defaultBoxDimension
+    var side: Int = defaultBoxDimension
+        private set
+    var maxPegWidth: Int = defaultBoxDimension
 
     init {
         prepareContentDescriptionFor(pegColor)
@@ -56,8 +58,17 @@ class MastermindPegHole(context: Context, attrs: AttributeSet?, defStyle: Int) :
             MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> height = MeasureSpec.getSize(heightMeasureSpec)
             MeasureSpec.UNSPECIFIED -> height = defaultBoxDimension
         }
-        this.side = width.coerceAtLeast(height)
-        setMeasuredDimension(this.side, this.side)
+
+        if (width > this.maxPegWidth) {
+            width = this.maxPegWidth
+        }
+
+        if (height > this.maxPegWidth) {
+            height = this.maxPegWidth
+        }
+
+        this.side = minOf(height, width)
+        setMeasuredDimension(this.side, this.side * 3)
     }
 
     fun setColor(pegColor: PegColor) {

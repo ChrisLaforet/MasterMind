@@ -12,11 +12,16 @@
         <activity
                 android:name=".board.PlayMastermindActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+                >
         </activity>
         <activity
                 android:name=".MainActivity"
-                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+                android:configChanges="orientation"
+                android:screenOrientation="portrait"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

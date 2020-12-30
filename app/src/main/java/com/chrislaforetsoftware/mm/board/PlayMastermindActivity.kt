@@ -3,9 +3,11 @@ package com.chrislaforetsoftware.mm.board
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.LinearLayout
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.Code
 import com.chrislaforetsoftware.mm.rules.PegColor
@@ -31,7 +33,6 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
     private lateinit var row9: MastermindPegRow
     private lateinit var topBar: Button
     private lateinit var codeRow: MastermindCodeRow
-
 
     private lateinit var rows: List<MastermindPegRow>
     private var currentActiveRow: Int = 0
@@ -59,14 +60,21 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         totalColors = intent.getIntExtra(TOTAL_COLORS, BASIC_COLORS)
         allowDuplicateColors = intent.getBooleanExtra(ALLOW_DUPLICATE_COLORS, false)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         prepareRows()
 
         val code = generateCodeToMatch()
         codeToMatch = Code(code)
+Log.d("CODE", "code is $codeToMatch")
 
         // start the game clock
         // Create clock here
 
+        currentActiveRow = 0
         rows[currentActiveRow].activateRow(true)
     }
 
@@ -101,10 +109,10 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         rows = allRows.toList()
     }
 
-    private fun preparePegRow(rowId: Int, rowNumber: Int, is6Well: Boolean): MastermindPegRow {
+    private fun preparePegRow(rowId: Int, number: Int, is6Well: Boolean): MastermindPegRow {
         val row = findViewById<MastermindPegRow>(rowId)
         row.setWells(if (is6Well) MAX_WELLS else BASIC_WELLS)
-        row.setNumber(rowNumber)
+        row.setNumber(number)
         row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         row.registerCheckPlay(this)
         return row
@@ -166,8 +174,17 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
     }
 
     private fun showCode(code: Code) {
+        val height = topBar.height
+
         topBar.visibility = GONE
         codeRow.visibility = VISIBLE
+
+        val params = codeRow.layoutParams
+        params.height = height
+        codeRow.layoutParams = params
+
+        codeRow.setMaxPegWidth(height)
+
         codeRow.setCodeColors(code.colors)
     }
 

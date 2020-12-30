@@ -44,7 +44,7 @@ class MastermindSelector(private val context: Context, private val activePegHole
         // https://stackoverflow.com/questions/5944987/how-to-create-a-popup-window-popupwindow-in-android
         // https://stackoverflow.com/questions/16818146/android-popupwindow-above-a-specific-view
 
-        val unitSize = activePegHole.height
+        val unitSize = activePegHole.side
         val focusable = true        // lets taps outside the popup also dismiss it
         popup = PopupWindow(popupView,
                 LinearLayout.LayoutParams.WRAP_CONTENT,

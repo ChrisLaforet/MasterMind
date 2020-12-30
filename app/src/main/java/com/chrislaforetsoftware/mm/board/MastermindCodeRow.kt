@@ -53,11 +53,22 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 			peg5.visibility = GONE
 		}
 		activeWells = wells.toList()
+
+		val pegWidth = context.resources.displayMetrics.heightPixels * 8 / 100
+		for (well in this.activeWells) {
+			well.maxPegWidth = pegWidth
+		}
 	}
 
 	fun setCodeColors(pegs: List<PegColor>) {
 		for (index in 0 until totalWells) {
 			activeWells[index].setColor(pegs[index])
+		}
+	}
+
+	fun setMaxPegWidth(maxPegWidth: Int) {
+		for (well in this.activeWells) {
+			well.maxPegWidth = maxPegWidth
 		}
 	}
 }

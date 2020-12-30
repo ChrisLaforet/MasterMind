@@ -1,8 +1,12 @@
 package com.chrislaforetsoftware.mm.board
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.res.Resources
 import android.util.AttributeSet
+import android.util.DisplayMetrics
+import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,6 +22,7 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
 	private var rowNumber: TextView
+	private var pegs: LinearLayout
 	private var peg0: MastermindPegHole
 	private var peg1: MastermindPegHole
 	private var peg2: MastermindPegHole
@@ -39,16 +44,18 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	init {
 		inflate(this.context, R.layout.mastermind_pegrow, this)
 
-		rowNumber = findViewById<TextView>(R.id.row_number)
+		val linearLayout = this as LinearLayout
+		rowNumber = linearLayout.findViewById<TextView>(R.id.row_number)
+		pegs = linearLayout.findViewById<LinearLayout>(R.id.pegs)
 		peg0 = preparePegHole(R.id.peg_0)
 		peg1 = preparePegHole(R.id.peg_1)
 		peg2 = preparePegHole(R.id.peg_2)
 		peg3 = preparePegHole(R.id.peg_3)
 		peg4 = preparePegHole(R.id.peg_4)
 		peg5 = preparePegHole(R.id.peg_5)
-		doneButton = findViewById<Button>(R.id.row_done)
-		blackCount = findViewById<TextView>(R.id.black_count)
-		whiteCount = findViewById<TextView>(R.id.white_count)
+		doneButton = linearLayout.findViewById<Button>(R.id.row_done)
+		blackCount = linearLayout.findViewById<TextView>(R.id.black_count)
+		whiteCount = linearLayout.findViewById<TextView>(R.id.white_count)
 	}
 
 	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
@@ -67,7 +74,7 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
 	fun setNumber(number: Int) {
 		this.row = number
-		this.rowNumber.text = this.row.toString()
+		this.rowNumber.text = number.toString()
 
 		val rowIs = resources.getString(R.string.row_is)
 		this.rowNumber.contentDescription = "$rowIs $this.row.toString()"
@@ -93,6 +100,18 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 			peg5.visibility = GONE
 		}
 		activeWells = wells.toList()
+		setMaxWidthForPegs()
+	}
+
+	private fun setMaxWidthForPegs() {
+		val pegsWidth = context.resources.displayMetrics.widthPixels * 70 / 100
+		val pegsHeight = context.resources.displayMetrics.heightPixels * 7 / 100
+		pegs.layoutParams = LinearLayout.LayoutParams(pegsWidth, pegsHeight)
+
+		val pegWidth = pegsWidth / PlayMastermindActivity.MAX_WELLS			// keep size consistent across the board
+		for (well in this.activeWells) {
+			well.maxPegWidth = pegWidth
+		}
 	}
 
 	fun activateRow(activate: Boolean) {
