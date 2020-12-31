@@ -75,6 +75,31 @@ class RulesTest {
         assertEquals(2, response.matchCorrect)
     }
 
+    @Test
+    fun givenACodeOfFourWithoutDuplicates_whenScoringUnmatchedCodeWithDuplicates_thenReturnsCountsOfEachExactMatchWithoutDuplicatingColorMatch() {
+        val colors = createCodeColorList(PegColor.Blue, PegColor.Green, PegColor.Yellow, PegColor.Red)
+        val code = Code(colors)
+
+        val guess = createCodeColorList(PegColor.Blue, PegColor.Blue, PegColor.Red, PegColor.Red)
+        val response = code.checkGuess(guess)
+
+        assertEquals(0, response.colorCorrect)
+        assertEquals(2, response.matchCorrect)
+    }
+
+    @Test
+    fun givenACodeOfFourWithoutDuplicates_whenScoringMatchedAndUnmatchedCodeWithDuplicates_thenReturnsCountsOfEachExactMatchWithoutDuplicatingColorMatch() {
+        val colors = createCodeColorList(PegColor.Blue, PegColor.Red, PegColor.Yellow, PegColor.Green)
+        val code = Code(colors)
+
+        val guess = createCodeColorList(PegColor.Blue, PegColor.Blue, PegColor.Green, PegColor.Blue)
+        val response = code.checkGuess(guess)
+
+        assertEquals(1, response.colorCorrect)
+        assertEquals(1, response.matchCorrect)
+    }
+
+
     //-----------------
 
     private fun createCodeColorList(color0: PegColor, color1: PegColor, color2: PegColor, color3: PegColor): List<PegColor> {

@@ -2,8 +2,7 @@ package com.chrislaforetsoftware.mm.rules
 
 import com.chrislaforetsoftware.mm.exception.InvalidSizeException
 
-data class Code(val colors: List<PegColor>) {
-}
+data class Code(val colors: List<PegColor>) { }
 
 fun Code.checkGuess(guessColors: List<PegColor>): Response {
 
@@ -12,6 +11,7 @@ fun Code.checkGuess(guessColors: List<PegColor>): Response {
     }
 
     var allCorrect = 0
+    val unmatchedColors = mutableSetOf<PegColor>()
     val uniqueGuessColors = mutableSetOf<PegColor>()
 
     for (index in guessColors.indices) {
@@ -20,6 +20,7 @@ fun Code.checkGuess(guessColors: List<PegColor>): Response {
         if (codeColor == guessColor) {
             ++allCorrect
         } else {
+            unmatchedColors.add(codeColor)
             uniqueGuessColors.add(guessColor)
         }
     }
@@ -28,14 +29,12 @@ fun Code.checkGuess(guessColors: List<PegColor>): Response {
         return Response(allCorrect, 0, true)
     }
 
-    val uniqueColors = mutableSetOf<PegColor>()
-    for (color in this.colors) {
-        uniqueColors.add(color)
-    }
     var colorCorrect = 0
     for (guessColor in uniqueGuessColors) {
-        if (uniqueColors.contains(guessColor)) {
+        val sameColor: PegColor? = unmatchedColors.firstOrNull { it.color == guessColor.color }
+        if (sameColor != null) {
             ++colorCorrect;
+            unmatchedColors.remove(sameColor)
         }
     }
 
