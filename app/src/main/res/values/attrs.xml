@@ -3,4 +3,9 @@
         <attr name="fullscreenBackgroundColor" format="color" />
         <attr name="fullscreenTextColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="mastermind_peg_row">
+        <attr name="row_number" format="integer" />
+    </declare-styleable>
+
 </resources>

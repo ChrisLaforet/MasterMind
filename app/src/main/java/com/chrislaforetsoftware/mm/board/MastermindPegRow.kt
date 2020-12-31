@@ -1,12 +1,10 @@
 package com.chrislaforetsoftware.mm.board
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.res.Resources
+import android.content.res.TypedArray
 import android.util.AttributeSet
-import android.util.DisplayMetrics
-import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -15,13 +13,14 @@ import com.chrislaforetsoftware.mm.rules.PegColor
 import com.chrislaforetsoftware.mm.rules.Response
 
 
+@SuppressLint("CustomViewStyleable")
 class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle), ChoiceListener {
 //	class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : View(context, attrs, defStyle) {
 
 	constructor(context: Context) : this(context, null, 0)
 	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
-	private var rowNumber: TextView
+	private var rowNumber: RowHeader
 	private var pegs: LinearLayout
 	private var peg0: MastermindPegHole
 	private var peg1: MastermindPegHole
@@ -33,7 +32,8 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	private var blackCount: TextView
 	private var whiteCount: TextView
 
-	private var row: Int = 0
+	var row: Int = 0
+		private set
 	private var choices = PlayMastermindActivity.BASIC_COLORS
 	private var totalWells = PlayMastermindActivity.BASIC_WELLS
 	private var activeWells: List<MastermindPegHole> = listOf()
@@ -42,20 +42,33 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 	private var popupSelector: MastermindSelector? = null
 
 	init {
+		if (attrs != null) {
+			val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.mastermind_peg_row)
+			val configuredRowNumber: Int = typedArray.getInt(R.styleable.mastermind_peg_row_row_number, 0)
+			row = configuredRowNumber
+
+			typedArray.recycle()
+		}
+
+		// https://www.vogella.com/tutorials/AndroidCustomViews/article.html
+
 		inflate(this.context, R.layout.mastermind_pegrow, this)
 
-		val linearLayout = this as LinearLayout
-		rowNumber = linearLayout.findViewById<TextView>(R.id.row_number)
-		pegs = linearLayout.findViewById<LinearLayout>(R.id.pegs)
+		rowNumber = findViewById<RowHeader>(R.id.row_number)
+		rowNumber.rowNumber = row.toString()
+		val rowIs = resources.getString(R.string.row_is)
+		rowNumber.contentDescription = "$rowIs $this.row.toString()"
+
+		pegs = findViewById<LinearLayout>(R.id.pegs)
 		peg0 = preparePegHole(R.id.peg_0)
 		peg1 = preparePegHole(R.id.peg_1)
 		peg2 = preparePegHole(R.id.peg_2)
 		peg3 = preparePegHole(R.id.peg_3)
 		peg4 = preparePegHole(R.id.peg_4)
 		peg5 = preparePegHole(R.id.peg_5)
-		doneButton = linearLayout.findViewById<Button>(R.id.row_done)
-		blackCount = linearLayout.findViewById<TextView>(R.id.black_count)
-		whiteCount = linearLayout.findViewById<TextView>(R.id.white_count)
+		doneButton = findViewById<Button>(R.id.row_done)
+		blackCount = findViewById<TextView>(R.id.black_count)
+		whiteCount = findViewById<TextView>(R.id.white_count)
 	}
 
 	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
@@ -74,7 +87,7 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
 	fun setNumber(number: Int) {
 		this.row = number
-		this.rowNumber.text = number.toString()
+		this.rowNumber.rowNumber = number.toString()
 
 		val rowIs = resources.getString(R.string.row_is)
 		this.rowNumber.contentDescription = "$rowIs $this.row.toString()"

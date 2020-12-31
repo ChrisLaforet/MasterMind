@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Button
-import android.widget.LinearLayout
 import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.rules.Code
 import com.chrislaforetsoftware.mm.rules.PegColor
@@ -112,7 +111,7 @@ Log.d("CODE", "code is $codeToMatch")
     private fun preparePegRow(rowId: Int, number: Int, is6Well: Boolean): MastermindPegRow {
         val row = findViewById<MastermindPegRow>(rowId)
         row.setWells(if (is6Well) MAX_WELLS else BASIC_WELLS)
-        row.setNumber(number)
+//      row.setNumber(number)
         row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         row.registerCheckPlay(this)
         return row

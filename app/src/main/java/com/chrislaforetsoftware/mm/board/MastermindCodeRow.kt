@@ -1,6 +1,7 @@
 package com.chrislaforetsoftware.mm.board
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.chrislaforetsoftware.mm.R
