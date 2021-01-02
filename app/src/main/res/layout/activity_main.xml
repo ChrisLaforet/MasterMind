@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Beginner 4 Color/4 Wells/No Dups"
+                android:text="@string/beginner_level_1_game"
                 android:textColor="@color/black"
                 android:background="#2E9132"
             />
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10sp"
-                    android:text="Beginner 6 Colors/4 Wells/Dups allowed"
+                    android:text="@string/beginner_level2_game"
                     android:textColor="@color/black"
                     android:background="#66AA66"
                     />
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:text="Original Mastermind 4 Colors/4 Wells/Dups allowed"
+                android:text="@string/original_game"
                 android:textColor="@color/black"
                 android:background="#FFEB3B" />
     </TableRow>
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:text="Challenge 6-Colors/6 Wells/No Dups"
+                android:text="@string/advanced_level1_game"
                 android:textColor="@color/black"
                 android:background="#cc8800"
                 />
@@ -111,10 +111,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:text="Brainbuster 6 Colors/6 Wells/Dups allowed"
+                android:text="@string/advanced_level2_game"
                 android:textColor="@color/black"
                 android:background="@android:color/holo_red_dark"
                 />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="10sp"
+        >
+
+        <Button
+            android:id="@+id/how_to_play_mastermind_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            android:text="@string/how_to_play_mastermind"
+            android:textColor="@color/white"
+            android:background="#333333"
+            />
     </TableRow>
 
 </TableLayout>

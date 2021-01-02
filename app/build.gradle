@@ -7,12 +7,16 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
+    lintOptions {
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.chrislaforetsoftware.mm"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 2
-        versionName "1.01"
+        versionCode 3
+        versionName "1.02"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

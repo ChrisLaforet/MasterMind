@@ -15,10 +15,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE)      // must precede content view
         setContentView(R.layout.activity_main)
-
-
         prepareButtons()
 
     }
@@ -47,6 +44,11 @@ class MainActivity : Activity() {
         button = findViewById(R.id.brainbuster_6by6_button) as? Button
         button?.setOnClickListener()  {
             startBrainBusterGame()
+        }
+
+        button = findViewById(R.id.how_to_play_mastermind_button) as? Button
+        button?.setOnClickListener()  {
+            showHowToPlay()
         }
     }
 
@@ -87,6 +89,11 @@ class MainActivity : Activity() {
         intent.putExtra(TOTAL_WELLS, PlayMastermindActivity.MAX_WELLS)
         intent.putExtra(TOTAL_COLORS, PlayMastermindActivity.BASIC_COLORS)
         intent.putExtra(ALLOW_DUPLICATE_COLORS, true)
+        startActivity(intent)
+    }
+
+    private fun showHowToPlay() {
+        val intent = Intent(this, HowToPlayMastermindActivity::class.java)
         startActivity(intent)
     }
 }

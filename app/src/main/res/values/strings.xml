@@ -46,5 +46,11 @@
 	<string name="you_lost">Sorry, you lost!</string>
 	<string name="lost_prompt">The code-maker has won this time around! Do you want to try again?</string>
 	<string name="show_hint">Show hint</string>
+	<string name="how_to_play_mastermind">How to play Mastermind</string>
+	<string name="beginner_level_1_game">Beginner 4 Color/4 Wells/No Dups</string>
+	<string name="beginner_level2_game">Beginner 6 Colors/4 Wells/No Dups allowed</string>
+	<string name="original_game">Original Mastermind 6 Colors/4 Wells/Dups allowed</string>
+	<string name="advanced_level1_game">Challenge 6-Colors/6 Wells/No Dups</string>
+	<string name="advanced_level2_game">Brainbuster 6 Colors/6 Wells/Dups allowed</string>
 
 </resources>
