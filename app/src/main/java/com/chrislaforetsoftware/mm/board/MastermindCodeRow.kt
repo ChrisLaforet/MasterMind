@@ -3,8 +3,11 @@ package com.chrislaforetsoftware.mm.board
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
+import android.widget.Button
 import android.widget.LinearLayout
 import com.chrislaforetsoftware.mm.R
+import com.chrislaforetsoftware.mm.board.PlayMastermindActivity.Companion.BASIC_WELLS
+import com.chrislaforetsoftware.mm.rules.Code
 import com.chrislaforetsoftware.mm.rules.PegColor
 
 
@@ -13,6 +16,7 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 	constructor(context: Context) : this(context, null, 0)
 	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
+	private var pegs: LinearLayout
 	private var peg0: MastermindPegHole
 	private var peg1: MastermindPegHole
 	private var peg2: MastermindPegHole
@@ -20,18 +24,32 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 	private var peg4: MastermindPegHole
 	private var peg5: MastermindPegHole
 
-	private var totalWells = PlayMastermindActivity.BASIC_WELLS
+	private var hintButton: Button
+
+	private var totalWells = PlayMastermindActivity.MAX_WELLS
 	private var activeWells: List<MastermindPegHole> = listOf()
+
+	private var hintMode = true;
+
+	private var codeToMatch: Code? = null
 
 	init {
 		inflate(this.context, R.layout.mastermind_coderow, this)
 
+		pegs = findViewById<LinearLayout>(R.id.pegs)
 		peg0 = preparePegHole(R.id.peg_0)
 		peg1 = preparePegHole(R.id.peg_1)
 		peg2 = preparePegHole(R.id.peg_2)
 		peg3 = preparePegHole(R.id.peg_3)
 		peg4 = preparePegHole(R.id.peg_4)
 		peg5 = preparePegHole(R.id.peg_5)
+
+		hintButton = findViewById<Button>(R.id.hint_button)
+		hintButton.setOnClickListener {
+
+		}
+
+		pegs.alpha = 0.4f
 	}
 
 	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
@@ -54,22 +72,33 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 			peg5.visibility = GONE
 		}
 		activeWells = wells.toList()
+		setMaxWidthForPegs()
+	}
 
-		val pegWidth = context.resources.displayMetrics.heightPixels * 8 / 100
+	fun setCodeColors(code: Code) {
+		codeToMatch = code
+	}
+
+	fun displayCodeColors() {
+		val codeColors = codeToMatch ?: return
+		for (index in 0 until totalWells) {
+			activeWells[index].setColor(codeColors.colors[index])
+		}
+
+		pegs.alpha = 1.0f
+
+		hintMode = false
+		hintButton.visibility = GONE
+	}
+
+	private fun setMaxWidthForPegs() {
+		val pegsWidth = context.resources.displayMetrics.widthPixels * 70 / 100
+		val pegsHeight = context.resources.displayMetrics.heightPixels * 7 / 100
+		pegs.layoutParams = LinearLayout.LayoutParams(pegsWidth, pegsHeight)
+
+		val pegWidth = pegsWidth / PlayMastermindActivity.MAX_WELLS			// keep size consistent across the board
 		for (well in this.activeWells) {
 			well.maxPegWidth = pegWidth
-		}
-	}
-
-	fun setCodeColors(pegs: List<PegColor>) {
-		for (index in 0 until totalWells) {
-			activeWells[index].setColor(pegs[index])
-		}
-	}
-
-	fun setMaxPegWidth(maxPegWidth: Int) {
-		for (well in this.activeWells) {
-			well.maxPegWidth = maxPegWidth
 		}
 	}
 }

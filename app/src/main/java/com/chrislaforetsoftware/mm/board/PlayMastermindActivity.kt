@@ -30,7 +30,6 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
     private lateinit var row7: MastermindPegRow
     private lateinit var row8: MastermindPegRow
     private lateinit var row9: MastermindPegRow
-    private lateinit var topBar: Button
     private lateinit var codeRow: MastermindCodeRow
 
     private lateinit var rows: List<MastermindPegRow>
@@ -67,10 +66,12 @@ class PlayMastermindActivity : Activity(), PegRowComplete {
         prepareRows()
 
         val code = generateCodeToMatch()
-        codeToMatch = Code(code)
-Log.d("CODE", "code is $codeToMatch")
+        val match = Code(code)
+        codeToMatch = match
+Log.d("CODE", "code is $match")
+        codeRow.setCodeColors(match)
 
-        // start the game clock
+        // start the game clock?
         // Create clock here
 
         currentActiveRow = 0
@@ -90,7 +91,6 @@ Log.d("CODE", "code is $codeToMatch")
         row8 = preparePegRow(R.id.peg_row_8, 9, is6Well)
         row9 = preparePegRow(R.id.peg_row_9, 10, is6Well)
 
-        topBar = findViewById<Button>(R.id.top_bar)
         codeRow = prepareCodeRow(is6Well)
 
         val allRows = mutableListOf<MastermindPegRow>()
@@ -158,7 +158,7 @@ Log.d("CODE", "code is $codeToMatch")
         row.setResults(response)
 
         if (response.matchCorrect == totalWells) {
-            showCode(code)
+            showCode()
             showSuccessAlert()
             return
         }
@@ -167,24 +167,13 @@ Log.d("CODE", "code is $codeToMatch")
         if (currentActiveRow < rows.size) {
             rows[currentActiveRow].activateRow(true)
         } else {
-            showCode(code)
+            showCode()
             showFailureAlert()
         }
     }
 
-    private fun showCode(code: Code) {
-        val height = topBar.height
-
-        topBar.visibility = GONE
-        codeRow.visibility = VISIBLE
-
-        val params = codeRow.layoutParams
-        params.height = height
-        codeRow.layoutParams = params
-
-        codeRow.setMaxPegWidth(height)
-
-        codeRow.setCodeColors(code.colors)
+    private fun showCode() {
+        codeRow.displayCodeColors()
     }
 
     private fun showSuccessAlert() {

@@ -69,6 +69,8 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 		doneButton = findViewById<Button>(R.id.row_done)
 		blackCount = findViewById<TextView>(R.id.black_count)
 		whiteCount = findViewById<TextView>(R.id.white_count)
+
+		this.alpha = 0.4f
 	}
 
 	private fun preparePegHole(pegHoleId: Int): MastermindPegHole {
@@ -129,6 +131,7 @@ class MastermindPegRow(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
 	fun activateRow(activate: Boolean) {
 		if (activate) {
+			this.alpha = 1.0f
 			this.doneButton.text = resources.getString(R.string.check_button_text)
 
 			this.doneButton.setOnClickListener {

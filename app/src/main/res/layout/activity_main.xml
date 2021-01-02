@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Beginner 4 Color/4 Wells/No dups"
+                android:text="Beginner 4 Color/4 Wells/No Dups"
                 android:textColor="@color/black"
                 android:background="#2E9132"
             />

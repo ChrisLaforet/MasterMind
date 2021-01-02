@@ -5,7 +5,6 @@
         style="@style/Widget.Theme.MasterMind.ButtonBar.Fullscreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="100"
         >
@@ -14,7 +13,8 @@
             android:id="@+id/row_number"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            />
+            android:layout_weight="10"
+        />
 
     <LinearLayout
             android:id="@+id/pegs"
