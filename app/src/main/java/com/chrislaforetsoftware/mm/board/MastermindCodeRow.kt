@@ -9,6 +9,7 @@ import com.chrislaforetsoftware.mm.R
 import com.chrislaforetsoftware.mm.board.PlayMastermindActivity.Companion.BASIC_WELLS
 import com.chrislaforetsoftware.mm.rules.Code
 import com.chrislaforetsoftware.mm.rules.PegColor
+import java.util.*
 
 
 class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle) {
@@ -46,7 +47,7 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 
 		hintButton = findViewById<Button>(R.id.hint_button)
 		hintButton.setOnClickListener {
-
+			showHint()
 		}
 
 		pegs.alpha = 0.4f
@@ -73,6 +74,34 @@ class MastermindCodeRow(context: Context, attrs: AttributeSet?, defStyle: Int) :
 		}
 		activeWells = wells.toList()
 		setMaxWidthForPegs()
+	}
+
+	private fun showHint() {
+		val clearWells = findIndexesForClearWells()
+		if (clearWells.isEmpty()) {
+			return
+		}
+		if (clearWells.size == 1) {
+			showHintAt(clearWells[0])
+		} else {
+			val which = Random().nextInt(clearWells.size)
+			showHintAt(clearWells[which])
+		}
+	}
+
+	private fun findIndexesForClearWells(): List<Int> {
+		val clearWells = mutableListOf<Int>()
+		for (index in 0 until totalWells) {
+			if (activeWells[index].getColor() == PegColor.Clear) {
+				clearWells.add(index)
+			}
+		}
+		return clearWells.toList()
+	}
+
+	private fun showHintAt(index: Int) {
+		val code = codeToMatch ?: return
+		activeWells[index].setColor(code.colors[index])
 	}
 
 	fun setCodeColors(code: Code) {

@@ -80,16 +80,16 @@ Log.d("CODE", "code is $match")
 
     private fun prepareRows() {
         val is6Well = totalWells == MAX_WELLS
-        row0 = preparePegRow(R.id.peg_row_0, 1, is6Well)
-        row1 = preparePegRow(R.id.peg_row_1, 2, is6Well)
-        row2 = preparePegRow(R.id.peg_row_2, 3, is6Well)
-        row3 = preparePegRow(R.id.peg_row_3, 4, is6Well)
-        row4 = preparePegRow(R.id.peg_row_4, 5, is6Well)
-        row5 = preparePegRow(R.id.peg_row_5, 6, is6Well)
-        row6 = preparePegRow(R.id.peg_row_6, 7, is6Well)
-        row7 = preparePegRow(R.id.peg_row_7, 8, is6Well)
-        row8 = preparePegRow(R.id.peg_row_8, 9, is6Well)
-        row9 = preparePegRow(R.id.peg_row_9, 10, is6Well)
+        row0 = preparePegRow(R.id.peg_row_0, is6Well)
+        row1 = preparePegRow(R.id.peg_row_1, is6Well)
+        row2 = preparePegRow(R.id.peg_row_2, is6Well)
+        row3 = preparePegRow(R.id.peg_row_3, is6Well)
+        row4 = preparePegRow(R.id.peg_row_4, is6Well)
+        row5 = preparePegRow(R.id.peg_row_5, is6Well)
+        row6 = preparePegRow(R.id.peg_row_6, is6Well)
+        row7 = preparePegRow(R.id.peg_row_7, is6Well)
+        row8 = preparePegRow(R.id.peg_row_8, is6Well)
+        row9 = preparePegRow(R.id.peg_row_9, is6Well)
 
         codeRow = prepareCodeRow(is6Well)
 
@@ -108,10 +108,9 @@ Log.d("CODE", "code is $match")
         rows = allRows.toList()
     }
 
-    private fun preparePegRow(rowId: Int, number: Int, is6Well: Boolean): MastermindPegRow {
+    private fun preparePegRow(rowId: Int, is6Well: Boolean): MastermindPegRow {
         val row = findViewById<MastermindPegRow>(rowId)
         row.setWells(if (is6Well) MAX_WELLS else BASIC_WELLS)
-//      row.setNumber(number)
         row.setChoices(if (totalColors == BASIC_COLORS) BASIC_COLORS else REDUCED_COLORS)
         row.registerCheckPlay(this)
         return row
